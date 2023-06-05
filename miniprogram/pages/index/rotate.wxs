@@ -1,0 +1,27 @@
+var isStopRotate = false;
+
+function startRotate(e, ownerInstance) {
+  var instance = ownerInstance.selectComponent(".userinfo-avatar");
+  var angle = 0;
+
+  function rotateFrame() {
+    if (isStopRotate) {
+      isStopRotate = false
+      return
+    }
+    instance.setStyle({
+      transform: 'rotate(' + angle++ + 'deg)'
+    });
+    instance.requestAnimationFrame(rotateFrame)
+  }
+  instance.requestAnimationFrame(rotateFrame)
+}
+
+function stopRotate() {
+  isStopRotate = true;
+}
+
+module.exports = {
+  startRotate: startRotate,
+  stopRotate: stopRotate
+};
